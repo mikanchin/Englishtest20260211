@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中一英単語帳 (200語)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg2: #1e293b;
+            --txt: #f1f5f9;
+            --txt2: #94a3b8;
+            --muted: #64748b;
+            --blue: #38bdf8;
+            --purple: #a78bfa;
+            --green: #34d399;
+            --orange: #fb923c;
+            --pink: #f472b6;
+            --border: #334155;
+            --r: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .home-btn {
+            color: var(--txt2);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+        }
+
+        .home-btn:hover {
+            color: var(--blue);
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            width: 100%;
+            max-width: 900px;
+            /* Wider for side-by-side */
+            margin: 0 auto;
+        }
+
+        .progress {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            color: var(--txt2);
+            font-weight: 500;
+        }
+
+        /* NEW CARD STYLES */
+        .card-container {
+            width: 100%;
+            background: var(--bg2);
+            border-radius: var(--r);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            display: flex;
+            overflow: hidden;
+            min-height: 400px;
+            cursor: pointer;
+            position: relative;
+            perspective: 2000px;
+            /* Depth for 3D flip */
+        }
+
+        /* Left Side: English */
+        .card-pane {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--bg2);
+            /* Ensure base bg */
+        }
+
+        .pane-left {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-right: 1px solid var(--border);
+        }
+
+        /* Right Side: Japanese (Answer) */
+        .pane-right {
+            background: linear-gradient(135deg, #334155, #1e293b);
+            position: relative;
+        }
+
+        /* Page Turn Animation Elements */
+        .flipper {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            /* Covers the right half */
+            height: 100%;
+            transform-origin: left center;
+            /* Spine */
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            z-index: 50;
+            pointer-events: none;
+            /* Let clicks pass through if needed, but mainly for visual */
+        }
+
+        .flipper.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .flipper-face {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            box-sizing: border-box;
+            border-left: 1px solid var(--border);
+            transition: background 0.4s;
+            /* Visual spine line */
+        }
+
+        .flipper-front {
+            /* Matches pane-right */
+            background: linear-gradient(135deg, #334155, #1e293b);
+            z-index: 2;
+        }
+
+        .flipper-back {
+            /* Matches pane-left */
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            transform: rotateY(180deg);
+            z-index: 1;
+            border-right: 1px solid var(--border);
+            border-left: none;
+        }
+
+        /* The Cover / Mask */
+        .answer-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: opacity 0.3s ease, visibility 0.3s;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .answer-cover.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .cover-icon {
+            font-size: 3rem;
+            opacity: 0.2;
+            color: var(--txt);
+        }
+
+        .cover-text {
+            color: var(--muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        .word-en {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .word-type {
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .word-jp {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--txt);
+            text-align: center;
+        }
+
+        .example {
+            margin-top: 24px;
+            font-size: 1rem;
+            color: var(--txt2);
+            text-align: center;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .controls {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--txt);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--border);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border: none;
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 6px 28px rgba(56, 189, 248, 0.4);
+        }
+
+        @media (max-width: 700px) {
+            .card-container {
+                flex-direction: column;
+                min-height: 500px;
+            }
+
+            .flipper {
+                width: 100%;
+                height: 50%;
+                top: 50%;
+                /* Starts at bottom */
+                transform-origin: top center;
+                right: auto;
+                left: 0;
+            }
+
+            .flipper.flipped {
+                transform: rotateX(180deg);
+            }
+
+            .flipper-back {
+                transform: rotateX(180deg);
+            }
+
+            .pane-left {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .word-en {
+                font-size: 2.5rem;
+            }
+
+            .word-jp {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← メニューに戻る</a>
+        <div style="font-weight: 700;">中1英単語帳</div>
+        <a href="words_list.html" style="color:var(--blue); text-decoration:none; font-size:0.9rem;">単語一覧</a>
+    </div>
+
+    <div class="container">
+        <div class="progress" id="progress">1 / 200</div>
+
+        <!-- Changing to Side-by-Side Layout -->
+        <div class="card-container" id="cardContainer">
+            <!-- Left: Answer (Previous Word) -->
+            <div class="card-pane pane-left" id="paneLeft" onclick="prev(event)">
+                <div id="leftContent" style="text-align:center; width:100%;"></div>
+            </div>
+
+            <!-- Right: Question (Current Word) -->
+            <div class="card-pane pane-right" id="paneRight" onclick="next(event)">
+                <div id="rightContent" style="text-align:center; width:100%;"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="shuffleWords(event)">🎲 シャッフル</button>
+            <button class="btn" onclick="prev(event)">← 前へ</button>
+            <button class="btn primary" onclick="next(event)">次へ →</button>
+        </div>
+    </div>
+
+    <script src="words.js"></script>
+    <script>
+        // words are now loaded from words.js
+
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        // Flow mode: Right is Question, Left is Answer/Previous
+        const paneLeft = document.getElementById('paneLeft');
+        const leftContent = document.getElementById('leftContent');
+        const paneRight = document.getElementById('paneRight');
+        const rightContent = document.getElementById('rightContent');
+        const progress = document.getElementById('progress');
+
+        function render() {
+            // Render Right Pane (The Question)
+            const questionIdx = currentIndex % words.length;
+            const q = words[questionIdx];
+
+            if (currentIndex < 0) currentIndex = 0;
+
+            // Should not happen if logic is correct, but safety:
+            if (!q) return;
+
+            if (rightContent) {
+                rightContent.innerHTML = getWordContent(q, 'question');
+            }
+
+            // Render Left Pane (The Answer / Previous)
+            if (currentIndex > 0) {
+                let answerIdx = (currentIndex - 1) % words.length;
+                if (answerIdx < 0) answerIdx = words.length - 1;
+
+                const a = words[answerIdx];
+                if (paneLeft) paneLeft.classList.add('is-active');
+                if (leftContent) {
+                    leftContent.innerHTML = getWordContent(a, 'answer');
+                }
+            } else {
+                if (paneLeft) paneLeft.classList.remove('is-active');
+                if (leftContent) {
+                    leftContent.innerHTML = `
+                        <div style="color:var(--muted); font-size: 0.9rem; text-align:center;">
+                            PRESS NEXT<br>TO START
+                        </div>
+                    `;
+                }
+            }
+
+            // Progress text
+            if (progress) progress.textContent = `Word ${questionIdx + 1} / ${words.length}`;
+        }
+
+        function createFlipper(frontContent, backContent, isPrev = false) {
+            const flipper = document.createElement('div');
+            flipper.className = 'flipper';
+            if (isPrev) {
+                flipper.classList.add('flipped');
+            }
+
+            // Front Face (Question side usually, but flipped logic depends on transforms)
+            // actually, flipper face 1 and 2
+
+            const front = document.createElement('div');
+            front.className = 'flipper-face flipper-front';
+            front.innerHTML = frontContent;
+
+            // Back Face
+            const back = document.createElement('div');
+            back.className = 'flipper-face flipper-back';
+            back.innerHTML = backContent;
+
+            flipper.appendChild(front);
+            flipper.appendChild(back);
+
+            return flipper;
+        }
+
+        function getWordContent(word, type) {
+            const jpType = getTypeJP(word.type);
+            if (type === 'question') {
+                return `
+                    <div class="word-type">${jpType}</div>
+                    <div class="word-en">${word.en}</div>
+                `;
+            } else {
+                return `
+                    <div class="word-type">${jpType}</div>
+                    <div class="word-jp">${word.jp}</div>
+                `;
+            }
+        }
+
+        function next(event) {
+            if (event) event.stopPropagation();
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const currentIdx = currentIndex % words.length;
+            const currentWord = words[currentIdx];
+
+            // 1. Setup Flipper (Right -> Left)
+            // Front: Current Question. Back: Current Answer.
+            const flipper = createFlipper(
+                getWordContent(currentWord, 'question'),
+                getWordContent(currentWord, 'answer'),
+                false
+            );
+            const container = document.getElementById('cardContainer');
+            container.appendChild(flipper);
+
+            // 2. Update Underlying DOM immediately
+            currentIndex++;
+            const nextIdx = currentIndex % words.length;
+            const nextWord = words[nextIdx];
+
+            // Right becomes Next Question immediately (covered by flipper front initially)
+            if (rightContent) rightContent.innerHTML = getWordContent(nextWord, 'question');
+
+            if (progress) progress.textContent = `Word ${nextIdx + 1} / ${words.length}`;
+
+            // 3. Animate
+            void flipper.offsetWidth;
+            flipper.classList.add('flipped');
+
+            // 4. Cleanup
+            setTimeout(() => {
+                container.removeChild(flipper);
+                render(); // Updates Left Pane to 'currentWord' Answer
+                isAnimating = false;
+            }, 400);
+        }
+
+        function prev(event) {
+            if (event) event.stopPropagation();
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const prevIdx = (currentIndex - 1 + words.length) % words.length; // The one we are going back to
+            const prevWord = words[prevIdx];
+
+            // 1. Setup Flipper (Left -> Right)
+            // Front: Prev Question (will land on Right). Back: Prev Answer (starts on Left).
+            const flipper = createFlipper(
+                getWordContent(prevWord, 'question'),
+                getWordContent(prevWord, 'answer'),
+                true // isPrev: starts flipped
+            );
+            const container = document.getElementById('cardContainer');
+            container.appendChild(flipper);
+
+            // 2. Update Underlying DOM
+            // Left Pane: needs to show (curr-2) Answer immediately, so when Flipper lifts off Left, (curr-2) is there.
+            const prevPrevIdx = (currentIndex - 2 + words.length) % words.length;
+            const prevPrevWord = words[prevPrevIdx];
+
+            if (leftContent) {
+                // Determine if we are at start
+                if (currentIndex - 1 <= 0) {
+                    leftContent.innerHTML = `
+                        <div style="color:var(--muted); font-size: 0.9rem; text-align:center;">
+                            PRESS NEXT<br>TO START
+                        </div>
+                    `;
+                    if (paneLeft) paneLeft.classList.remove('is-active');
+                } else {
+                    leftContent.innerHTML = getWordContent(prevPrevWord, 'answer');
+                    if (paneLeft) paneLeft.classList.add('is-active');
+                }
+            }
+
+            currentIndex--;
+            if (currentIndex < 0) currentIndex = words.length - 1;
+
+            if (progress) progress.textContent = `Word ${currentIndex + 1} / ${words.length}`;
+
+            // 3. Animate (Remove flipped class)
+            void flipper.offsetWidth;
+            flipper.classList.remove('flipped');
+
+            // 4. Cleanup
+            setTimeout(() => {
+                container.removeChild(flipper);
+                render(); // Updates Right Pane to `prevWord` Question effectively
+                isAnimating = false;
+            }, 400);
+        }
+
+        function shuffleWords(event) {
+            if (event) event.stopPropagation();
+            // Fisher-Yates shuffle
+            for (let i = words.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [words[i], words[j]] = [words[j], words[i]];
+            }
+            currentIndex = 0;
+            render();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                next();
+            } else if (e.key === 'ArrowLeft') {
+                prev();
+            }
+        });
+
+        // Initialize
+        render();
+
+    </script>
+</body>
+
+</html>

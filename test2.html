@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学1年生 英語長文問題 ② 料理と文化祭</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg2: #1e293b;
+            --txt: #f1f5f9;
+            --txt2: #94a3b8;
+            --muted: #64748b;
+            --blue: #38bdf8;
+            --purple: #a78bfa;
+            --green: #34d399;
+            --orange: #fb923c;
+            --ok: #22c55e;
+            --ng: #ef4444;
+            --border: #334155;
+            --r: 16px
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            line-height: 1.8;
+            min-height: 100vh
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f, #2d1b69, #1e3a5f);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(56, 189, 248, .08), transparent 50%), radial-gradient(circle at 70% 50%, rgba(167, 139, 250, .08), transparent 50%);
+            animation: fl 12s ease-in-out infinite
+        }
+
+        @keyframes fl {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-20px)
+            }
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero .sub {
+            color: var(--txt2);
+            font-size: 1rem;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: .85rem;
+            color: var(--txt2)
+        }
+
+        .stat span {
+            font-weight: 700;
+            color: var(--blue)
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 80px
+        }
+
+        .passage {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 36px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .3);
+            position: relative
+        }
+
+        .passage::before {
+            content: '📖 Reading Passage';
+            position: absolute;
+            top: -14px;
+            left: 24px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: .8rem;
+            font-weight: 600
+        }
+
+        .passage p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 2.2;
+            margin-bottom: 16px;
+            text-indent: 1.5em;
+            text-align: justify
+        }
+
+        .wc {
+            text-align: right;
+            font-size: .8rem;
+            color: var(--muted);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border)
+        }
+
+        .sec-h {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border)
+        }
+
+        .sec-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0
+        }
+
+        .sec-icon.ch {
+            background: linear-gradient(135deg, #3b82f6, #2563eb)
+        }
+
+        .sec-icon.tf {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed)
+        }
+
+        .sec-t {
+            font-size: 1.2rem;
+            font-weight: 700
+        }
+
+        .sec-d {
+            font-size: .85rem;
+            color: var(--muted)
+        }
+
+        .qc {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all .3s
+        }
+
+        .qc:hover {
+            border-color: rgba(56, 189, 248, .3)
+        }
+
+        .qc.ok {
+            border-color: var(--ok);
+            background: rgba(34, 197, 94, .05)
+        }
+
+        .qc.ng {
+            border-color: var(--ng);
+            background: rgba(239, 68, 68, .05)
+        }
+
+        .qn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            font-size: .8rem;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0
+        }
+
+        .qt {
+            font-size: .98rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-left: 38px
+        }
+
+        @media(max-width:600px) {
+            .choices {
+                grid-template-columns: 1fr
+            }
+
+            .hero h1 {
+                font-size: 1.6rem
+            }
+
+            .passage {
+                padding: 24px 18px
+            }
+
+            .qc {
+                padding: 18px
+            }
+
+            .container {
+                padding: 20px 12px 60px
+            }
+        }
+
+        .cb {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--txt);
+            font-size: .9rem;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: left;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif
+        }
+
+        .cb:hover {
+            background: rgba(56, 189, 248, .08);
+            border-color: var(--blue);
+            transform: translateY(-1px)
+        }
+
+        .cb.sel {
+            background: rgba(56, 189, 248, .15);
+            border-color: var(--blue);
+            color: var(--blue);
+            font-weight: 500
+        }
+
+        .cb.ca {
+            background: rgba(34, 197, 94, .15);
+            border-color: var(--ok);
+            color: var(--ok)
+        }
+
+        .cb.wa {
+            background: rgba(239, 68, 68, .15);
+            border-color: var(--ng);
+            color: var(--ng)
+        }
+
+        .tfc {
+            display: flex;
+            gap: 12px;
+            margin-left: 38px
+        }
+
+        .tb {
+            flex: 1;
+            max-width: 180px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, .04);
+            color: var(--txt);
+            font-size: .9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: center;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif
+        }
+
+        .tb:hover {
+            transform: translateY(-1px)
+        }
+
+        .tb.t:hover {
+            background: rgba(34, 197, 94, .1);
+            border-color: var(--ok)
+        }
+
+        .tb.f:hover {
+            background: rgba(239, 68, 68, .1);
+            border-color: var(--ng)
+        }
+
+        .tb.sel.t {
+            background: rgba(34, 197, 94, .15);
+            border-color: var(--ok);
+            color: var(--ok)
+        }
+
+        .tb.sel.f {
+            background: rgba(239, 68, 68, .15);
+            border-color: var(--ng);
+            color: var(--ng)
+        }
+
+        .tb.ca {
+            background: rgba(34, 197, 94, .2) !important;
+            border-color: var(--ok) !important;
+            color: var(--ok) !important
+        }
+
+        .tb.wa {
+            background: rgba(239, 68, 68, .2) !important;
+            border-color: var(--ng) !important;
+            color: var(--ng) !important
+        }
+
+        .fb {
+            display: none;
+            margin-top: 8px;
+            margin-left: 38px;
+            font-size: .82rem;
+            padding: 8px 12px;
+            border-radius: 6px
+        }
+
+        .fb.v {
+            display: block;
+            animation: fi .4s ease
+        }
+
+        .fb.okf {
+            background: rgba(34, 197, 94, .08);
+            color: var(--ok)
+        }
+
+        .fb.ngf {
+            background: rgba(239, 68, 68, .08);
+            color: var(--ng)
+        }
+
+        @keyframes fi {
+            from {
+                opacity: 0;
+                transform: translateY(-4px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 40px
+        }
+
+        .sub-b {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            border: none;
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all .3s;
+            font-family: 'Noto Sans JP', sans-serif;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, .3)
+        }
+
+        .sub-b:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(56, 189, 248, .4)
+        }
+
+        .clear-b {
+            background: transparent;
+            color: var(--txt2);
+            border: 1px solid var(--border);
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all .3s;
+            font-family: 'Noto Sans JP', sans-serif
+        }
+
+        .clear-b:hover {
+            background: rgba(239, 68, 68, .1);
+            border-color: var(--ng);
+            color: var(--ng);
+            transform: translateY(-2px)
+        }
+
+        .sov {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, .9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fi .4s ease
+        }
+
+        .sov.v {
+            display: flex
+        }
+
+        .sc {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 48px;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+            animation: pi .5s ease
+        }
+
+        @keyframes pi {
+            from {
+                opacity: 0;
+                transform: scale(.8)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        .scr {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            position: relative
+        }
+
+        .scr::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--blue), var(--purple), var(--green));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude
+        }
+
+        .sl {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .sd {
+            color: var(--txt2);
+            font-size: .9rem;
+            margin-bottom: 24px;
+            white-space: pre-line
+        }
+
+        .clb {
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid var(--border);
+            color: var(--txt);
+            padding: 10px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: .9rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all .25s
+        }
+
+        .clb:hover {
+            background: rgba(255, 255, 255, .12)
+        }
+
+        .history-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border)
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px
+        }
+
+        .history-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .history-clear {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: .8rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all .25s
+        }
+
+        .history-clear:hover {
+            border-color: var(--ng);
+            color: var(--ng)
+        }
+
+        .history-empty {
+            text-align: center;
+            color: var(--muted);
+            padding: 30px;
+            font-size: .9rem
+        }
+
+        .hi {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            animation: fi .4s ease
+        }
+
+        .hi-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .hi-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .06);
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--txt2);
+            flex-shrink: 0
+        }
+
+        .hi-date {
+            font-size: .82rem;
+            color: var(--muted)
+        }
+
+        .hi-score {
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .hi-score.high {
+            color: var(--ok)
+        }
+
+        .hi-score.mid {
+            color: var(--blue)
+        }
+
+        .hi-score.low {
+            color: var(--orange)
+        }
+
+
+        .hi-detail {
+            font-size: .78rem;
+            color: var(--txt2)
+        }
+
+        .print-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg2);
+            color: var(--txt);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all 0.2s;
+            margin-left: auto;
+            display: flex;
+        }
+
+        .print-btn:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .hero,
+            #part1,
+            #part2,
+            .btn-row,
+            .history-section,
+            .sov,
+            .print-btn {
+                display: none !important;
+            }
+
+            .container {
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .passage {
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                color: #000;
+            }
+
+            .passage::before {
+                display: none;
+            }
+
+            .passage p {
+                font-size: 12pt;
+                line-height: 1.8;
+                text-align: left;
+                text-indent: 1em;
+            }
+
+            .wc {
+                color: #444;
+                border-top: 1px solid #ccc;
+            }
+
+            /* Add a title for print */
+            .passage::after {
+                content: "English Reading Test 2 - Passage Only";
+                position: absolute;
+                top: -30px;
+                left: 0;
+                font-size: 14pt;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <h1>🍳 English Reading Test ②</h1>
+        <p class="sub">中学1年生 ― 料理と文化祭</p>
+        <div class="stats">
+            <div class="stat">📝 問題数 <span>50問</span></div>
+            <div class="stat">📖 長文 <span>約1000文字</span></div>
+            <div class="stat">⏱ 目安 <span>50分</span></div>
+        </div>
+    </div>
+    <div class="container">
+        <button class="print-btn" onclick="window.print()">🖨 本文のみ印刷</button>
+        <div class="passage">
+            <p>My name is Takeru Yamada. I am thirteen years old. I am a first-year student at Midori Junior High
+                School. I live in Yokohama with my family. There are five people in my family: my father, my mother, my
+                sister Emi, my grandmother, and me. My father works at a restaurant. He is a chef. My mother works at a
+                bookstore near our house.</p>
+            <p>I love cooking very much. I started cooking when I was ten years old. My father taught me how to cook. My
+                best dish is curry rice. I can also make omelets and sandwiches. I cook dinner for my family every
+                Saturday. My grandmother always says my food is delicious. That makes me very happy.</p>
+            <p>At school, my favorite subject is home economics because we can cook in class. I am also in the cooking
+                club. There are twelve members in our club. We practice cooking every Tuesday and Thursday after school.
+                Our club teacher is Ms. Sato. She is very kind and teaches us many recipes.</p>
+            <p>Next month, we will have a school festival. Our cooking club will sell pancakes at the festival. We are
+                going to make three kinds of pancakes: chocolate, strawberry, and banana. I am the leader of the pancake
+                team. We practice making pancakes every week. I want everyone to enjoy our pancakes.</p>
+            <p>My dream is to become a chef like my father. I want to open my own restaurant someday. I will study hard
+                and practice cooking every day to make my dream come true.</p>
+            <div class="wc">Word Count: 約 1,010 文字</div>
+        </div>
+        <div id="part1"></div>
+        <div id="part2"></div>
+        <div class="btn-row"><button class="sub-b" onclick="grade()">📊 採点する</button><button class="clear-b"
+                onclick="clearTest()">🔄 やり直す</button></div>
+        <div class="history-section">
+            <div class="history-header">
+                <div class="history-title">📋 採点履歴</div><button class="history-clear"
+                    onclick="clearHistory()">履歴をクリア</button>
+            </div>
+            <div id="historyList"></div>
+        </div>
+    </div>
+    <div class="sov" id="ov">
+        <div class="sc">
+            <div class="scr" id="scr">–</div>
+            <div class="sl" id="sl">結果</div>
+            <div class="sd" id="sd"></div><button class="clb"
+                onclick="document.getElementById('ov').classList.remove('v')">閉じる</button>
+        </div>
+    </div>
+    <script>
+        const STORAGE_KEY = 'testHistory2';
+        const MC = [
+            { q: "How old is Takeru?", a: "b", o: ["Twelve", "Thirteen", "Fourteen", "Fifteen"], e: "\"I am thirteen years old.\" と書かれています。" },
+            { q: "Where does Takeru live?", a: "c", o: ["Tokyo", "Osaka", "Yokohama", "Kyoto"], e: "\"I live in Yokohama\" と書かれています。" },
+            { q: "How many people are in Takeru's family?", a: "c", o: ["Three", "Four", "Five", "Six"], e: "家族は5人と書かれています。" },
+            { q: "What is Takeru's father's job?", a: "a", o: ["A chef", "A teacher", "A doctor", "A driver"], e: "\"He is a chef.\" と書かれています。" },
+            { q: "Where does Takeru's mother work?", a: "d", o: ["At a hospital", "At a school", "At a restaurant", "At a bookstore"], e: "\"a bookstore near our house\" と書かれています。" },
+            { q: "When did Takeru start cooking?", a: "b", o: ["When he was eight", "When he was ten", "When he was twelve", "When he was thirteen"], e: "\"when I was ten years old\" と書かれています。" },
+            { q: "What is Takeru's best dish?", a: "a", o: ["Curry rice", "Fried rice", "Spaghetti", "Ramen"], e: "\"My best dish is curry rice.\" と書かれています。" },
+            { q: "When does Takeru cook dinner for his family?", a: "d", o: ["Every Sunday", "Every Friday", "Every day", "Every Saturday"], e: "\"every Saturday\" と書かれています。" },
+            { q: "What is Takeru's favorite subject?", a: "c", o: ["English", "Math", "Home economics", "Science"], e: "\"My favorite subject is home economics\" と書かれています。" },
+            { q: "How many members are in the cooking club?", a: "b", o: ["Ten", "Twelve", "Fourteen", "Twenty"], e: "\"twelve members\" と書かれています。" },
+            { q: "When does the cooking club practice?", a: "d", o: ["Monday and Wednesday", "Monday and Friday", "Wednesday and Friday", "Tuesday and Thursday"], e: "\"every Tuesday and Thursday\" と書かれています。" },
+            { q: "Who is the club teacher?", a: "a", o: ["Ms. Sato", "Mr. Tanaka", "Ms. Suzuki", "Mr. Yamada"], e: "\"Ms. Sato\" と書かれています。" },
+            { q: "What will the cooking club sell at the festival?", a: "b", o: ["Cookies", "Pancakes", "Sandwiches", "Curry rice"], e: "\"sell pancakes\" と書かれています。" },
+            { q: "How many kinds of pancakes will they make?", a: "c", o: ["One", "Two", "Three", "Four"], e: "\"three kinds of pancakes\" と書かれています。" },
+            { q: "What flavors of pancakes will they make?", a: "a", o: ["Chocolate, strawberry, and banana", "Chocolate, vanilla, and strawberry", "Banana, apple, and chocolate", "Strawberry, lemon, and banana"], e: "\"chocolate, strawberry, and banana\" と書かれています。" },
+            { q: "What is Takeru's role in the pancake team?", a: "b", o: ["A member", "The leader", "The cook", "The teacher"], e: "\"I am the leader of the pancake team.\" と書かれています。" },
+            { q: "What is Takeru's dream?", a: "c", o: ["To become a teacher", "To become a doctor", "To become a chef", "To become a pilot"], e: "\"to become a chef like my father\" と書かれています。" },
+            { q: "Who taught Takeru how to cook?", a: "a", o: ["His father", "His mother", "His grandmother", "His sister"], e: "\"My father taught me\" と書かれています。" },
+            { q: "What can Takeru also make besides curry rice?", a: "d", o: ["Pizza and pasta", "Sushi and ramen", "Cake and cookies", "Omelets and sandwiches"], e: "\"omelets and sandwiches\" と書かれています。" },
+            { q: "Who says Takeru's food is delicious?", a: "b", o: ["His mother", "His grandmother", "His sister", "His father"], e: "\"My grandmother always says\" と書かれています。" },
+            { q: "What does Takeru want to open someday?", a: "c", o: ["A bookstore", "A cooking school", "His own restaurant", "A cafe"], e: "\"open my own restaurant\" と書かれています。" },
+            { q: "What school does Takeru go to?", a: "a", o: ["Midori Junior High School", "Sakura Junior High School", "Hikari Junior High School", "Aoba Junior High School"], e: "\"Midori Junior High School\" と書かれています。" },
+            { q: "What does Ms. Sato teach the club members?", a: "d", o: ["English", "Music", "Sports", "Many recipes"], e: "\"teaches us many recipes\" と書かれています。" },
+            { q: "When will the school festival be held?", a: "b", o: ["This week", "Next month", "Next week", "This month"], e: "\"Next month\" と書かれています。" },
+            { q: "What does Takeru want everyone to do at the festival?", a: "a", o: ["Enjoy their pancakes", "Buy many pancakes", "Come to the festival", "Cook together"], e: "\"I want everyone to enjoy our pancakes\" と書かれています。" }
+        ];
+        const TF = [
+            { q: "Takeru lives in Tokyo.", a: false, e: "東京ではなく横浜（Yokohama）に住んでいます。" },
+            { q: "Takeru's father is a chef.", a: true, e: "\"He is a chef.\" と書かれています。" },
+            { q: "There are four people in Takeru's family.", a: false, e: "4人ではなく5人（five）です。" },
+            { q: "Takeru's mother works at a restaurant.", a: false, e: "レストランではなく本屋（bookstore）で働いています。" },
+            { q: "Takeru started cooking when he was ten years old.", a: true, e: "\"when I was ten years old\" と書かれています。" },
+            { q: "Takeru's best dish is fried rice.", a: false, e: "チャーハンではなくカレーライス（curry rice）です。" },
+            { q: "Takeru cooks dinner for his family every Sunday.", a: false, e: "日曜日ではなく土曜日（Saturday）です。" },
+            { q: "Takeru's grandmother says his food is delicious.", a: true, e: "\"My grandmother always says my food is delicious.\" と書かれています。" },
+            { q: "Takeru's favorite subject is English.", a: false, e: "英語ではなく家庭科（home economics）です。" },
+            { q: "There are twelve members in the cooking club.", a: true, e: "\"twelve members\" と書かれています。" },
+            { q: "The cooking club practices on Monday and Wednesday.", a: false, e: "月・水ではなく火・木（Tuesday and Thursday）です。" },
+            { q: "Ms. Sato is the cooking club teacher.", a: true, e: "\"Our club teacher is Ms. Sato.\" と書かれています。" },
+            { q: "The cooking club will sell cookies at the festival.", a: false, e: "クッキーではなくパンケーキ（pancakes）を売ります。" },
+            { q: "They will make three kinds of pancakes.", a: true, e: "\"three kinds of pancakes\" と書かれています。" },
+            { q: "Takeru is the leader of the pancake team.", a: true, e: "\"I am the leader of the pancake team.\" と書かれています。" },
+            { q: "Takeru wants to become a teacher.", a: false, e: "先生ではなくシェフ（chef）になりたいです。" },
+            { q: "Takeru's father taught him how to cook.", a: true, e: "\"My father taught me how to cook.\" と書かれています。" },
+            { q: "Takeru can make sushi.", a: false, e: "寿司ではなくオムレツとサンドイッチが作れます。" },
+            { q: "Ms. Sato is strict.", a: false, e: "厳しいではなく優しい（kind）と書かれています。" },
+            { q: "Takeru wants to open his own restaurant.", a: true, e: "\"open my own restaurant\" と書かれています。" },
+            { q: "Emi is Takeru's brother.", a: false, e: "兄弟ではなく姉妹（sister）です。" },
+            { q: "The school festival is this week.", a: false, e: "今週ではなく来月（next month）です。" },
+            { q: "Takeru practices making pancakes every week.", a: true, e: "\"We practice making pancakes every week.\" と書かれています。" },
+            { q: "Takeru's favorite subject is home economics because he can cook in class.", a: true, e: "\"because we can cook in class\" と書かれています。" },
+            { q: "Takeru lives with his grandfather.", a: false, e: "祖父ではなく祖母（grandmother）と住んでいます。" }
+        ];
+        const ua = {}, labels = ["ア", "イ", "ウ", "エ"], keys = ["a", "b", "c", "d"];
+        function buildMC() { let h = '<div class="sec-h"><div class="sec-icon ch">🅰</div><div><div class="sec-t">Part 1：選択式問題（Q1～Q25）</div><div class="sec-d">正しい答えをア～エの中から1つ選びなさい。</div></div></div>'; MC.forEach((item, i) => { const n = i + 1; h += `<div class="qc" id="q${n}"><div class="qt"><span class="qn">${n}</span>${item.q}</div><div class="choices">`; item.o.forEach((opt, j) => { h += `<button class="cb" data-q="${n}" data-v="${keys[j]}" onclick="sel(this)">${labels[j]}. ${opt}</button>`; }); h += `</div><div class="fb" id="fb${n}"></div></div>`; }); document.getElementById('part1').innerHTML = h; }
+        function buildTF() { let h = '<div class="sec-h"><div class="sec-icon tf">⭕</div><div><div class="sec-t">Part 2：正誤問題（Q26～Q50）</div><div class="sec-d">本文の内容と合っていれば「〇 True」、合っていなければ「✕ False」を選びなさい。</div></div></div>'; TF.forEach((item, i) => { const n = i + 26; h += `<div class="qc" id="q${n}"><div class="qt"><span class="qn">${n}</span>${item.q}</div><div class="tfc"><button class="tb t" data-q="${n}" data-v="true" onclick="tsel(this)">〇 True</button><button class="tb f" data-q="${n}" data-v="false" onclick="tsel(this)">✕ False</button></div><div class="fb" id="fb${n}"></div></div>`; }); document.getElementById('part2').innerHTML = h; }
+        function sel(el) { const q = el.dataset.q; document.querySelectorAll(`.cb[data-q="${q}"]`).forEach(b => b.classList.remove('sel')); el.classList.add('sel'); ua[q] = el.dataset.v; }
+        function tsel(el) { const q = el.dataset.q; document.querySelectorAll(`.tb[data-q="${q}"]`).forEach(b => b.classList.remove('sel')); el.classList.add('sel'); ua[q] = el.dataset.v; }
+        function grade() { let c = 0; MC.forEach((item, i) => { const n = i + 1, card = document.getElementById(`q${n}`), fb = document.getElementById(`fb${n}`); card.classList.remove('ok', 'ng'); fb.classList.remove('v', 'okf', 'ngf'); document.querySelectorAll(`.cb[data-q="${n}"]`).forEach(b => b.classList.remove('ca', 'wa')); if (ua[n] === item.a) { c++; card.classList.add('ok'); fb.textContent = '✅ 正解！ — ' + item.e; fb.classList.add('v', 'okf'); } else { card.classList.add('ng'); fb.textContent = '❌ 不正解 — ' + item.e; fb.classList.add('v', 'ngf'); document.querySelector(`.cb[data-q="${n}"][data-v="${item.a}"]`)?.classList.add('ca'); if (ua[n]) document.querySelector(`.cb[data-q="${n}"][data-v="${ua[n]}"]`)?.classList.add('wa'); } }); TF.forEach((item, i) => { const n = i + 26, card = document.getElementById(`q${n}`), fb = document.getElementById(`fb${n}`), ans = String(item.a); card.classList.remove('ok', 'ng'); fb.classList.remove('v', 'okf', 'ngf'); document.querySelectorAll(`.tb[data-q="${n}"]`).forEach(b => b.classList.remove('ca', 'wa')); if (ua[n] === ans) { c++; card.classList.add('ok'); fb.textContent = '✅ 正解！ — ' + item.e; fb.classList.add('v', 'okf'); } else { card.classList.add('ng'); fb.textContent = '❌ 不正解 — ' + item.e; fb.classList.add('v', 'ngf'); document.querySelector(`.tb[data-q="${n}"][data-v="${ans}"]`)?.classList.add('ca'); if (ua[n]) document.querySelector(`.tb[data-q="${n}"][data-v="${ua[n]}"]`)?.classList.add('wa'); } }); const total = 50, pct = Math.round(c / total * 100); document.getElementById('scr').textContent = pct + '%'; const sl = document.getElementById('sl'); if (pct >= 80) { sl.textContent = '🎉 すばらしい！'; sl.style.color = 'var(--ok)'; } else if (pct >= 60) { sl.textContent = '👍 がんばりました！'; sl.style.color = 'var(--blue)'; } else { sl.textContent = '📖 もう一度読んでみよう！'; sl.style.color = 'var(--orange)'; } document.getElementById('sd').textContent = `${c} / ${total} 問正解\n選択式：${MC.length}問 ／ 正誤：${TF.length}問`; document.getElementById('ov').classList.add('v'); document.getElementById('q1').scrollIntoView({ behavior: 'smooth', block: 'start' }); const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); history.push({ date: new Date().toLocaleString('ja-JP'), correct: c, total: total, pct: pct }); localStorage.setItem(STORAGE_KEY, JSON.stringify(history)); renderHistory(); }
+        function clearTest() { Object.keys(ua).forEach(k => delete ua[k]); document.querySelectorAll('.cb').forEach(b => b.classList.remove('sel', 'ca', 'wa')); document.querySelectorAll('.tb').forEach(b => b.classList.remove('sel', 'ca', 'wa')); document.querySelectorAll('.qc').forEach(c => c.classList.remove('ok', 'ng')); document.querySelectorAll('.fb').forEach(f => { f.classList.remove('v', 'okf', 'ngf'); f.textContent = ''; }); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function renderHistory() { const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); const el = document.getElementById('historyList'); if (!history.length) { el.innerHTML = '<div class="history-empty">まだ採点履歴がありません。</div>'; return; } let h = ''; history.slice().reverse().forEach((item, i) => { const num = history.length - i, cls = item.pct >= 80 ? 'high' : item.pct >= 60 ? 'mid' : 'low'; h += `<div class="hi"><div class="hi-left"><span class="hi-num">${num}</span><div><div class="hi-detail">${item.correct} / ${item.total} 問正解</div><div class="hi-date">${item.date}</div></div></div><div class="hi-score ${cls}">${item.pct}%</div></div>`; }); el.innerHTML = h; }
+        function clearHistory() { if (confirm('採点履歴をすべて削除しますか？')) { localStorage.removeItem(STORAGE_KEY); renderHistory(); } }
+        document.getElementById('ov').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('v'); });
+        buildMC(); buildTF(); renderHistory();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Mastery - 中学英語長文ドリル</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030712;
+      --surface: #111827;
+      --surface-accent: rgba(255, 255, 255, 0.03);
+      --primary: #6366f1;
+      --secondary: #d946ef;
+      --accent: #0ea5e9;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(17, 24, 39, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(217, 70, 239, 0.15), transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Hero Section */
+    header {
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      filter: blur(120px);
+      opacity: 0.2;
+      z-index: -1;
+      animation: pulse 8s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.2;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.3;
+      }
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(to right, #fff, #9ca3af);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    /* Container & Grid */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    /* Card Design */
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      width: 56px;
+      height: 56px;
+      background: var(--surface-accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .card-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card-description {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card-tag {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .card-tag span {
+      width: 16px;
+      height: 2px;
+      background: currentColor;
+      transition: width 0.3s;
+    }
+
+    .card:hover .card-tag span {
+      width: 24px;
+    }
+
+    /* Specialized Cards for Flashcards */
+    .card.flashcard {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(217, 70, 239, 0.1));
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .card.flashcard:hover {
+      border-color: rgba(217, 70, 239, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero-glow"></div>
+
+  <header>
+    <h1>English Mastery</h1>
+    <p>中学1年生向け長文読解トレーニングシステム。最新のUIで楽しく英語力を磨こう。</p>
+    <div class="scroll-hint">
+      <span>Scroll down</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Reading Comprehension Tests</h2>
+    <div class="grid">
+      <a href="test1.html" class="card">
+        <div class="card-icon">🇬🇧</div>
+        <div class="card-number">Test 01</div>
+        <div class="card-title">自己紹介 (Greeting)</div>
+        <div class="card-description">Yuki Tanakaの自己紹介。家族や学校生活、将来の夢について。基本的な語彙と基礎文法の復習に。</div>
+        <div class="card-tag"><span></span> Start Practice</div>
+      </a>
+
+      <a href="test2.html" class="card">
+        <div class="card-icon">🍳</div>
+        <div class="card-number">Test 02</div>
+        <div class="card-title">料理と文化祭</div>
+        <div class="card-description">料理クラブの活動と、文化祭でのパンケーキ販売。日常生活や学校行事の表現を学びます。</div>
+        <div class="card-tag"><span></span> Start Practice</div>
+      </a>
+
+      <a href="test3.html" class="card">
+        <div class="card-icon">🌊</div>
+        <div class="card-number">Test 03</div>
+        <div class="card-title">夏休みの旅行 (Okinawa)</div>
+        <div class="card-description">楽しかった沖縄旅行。海での水泳や美ら海水族館、首里城の観光。過去形（〜した）の練習に。</div>
+        <div class="card-tag"><span></span> Start Practice</div>
+      </a>
+
+      <a href="test4.html" class="card">
+        <div class="card-icon">🌍</div>
+        <div class="card-number">Test 04</div>
+        <div class="card-title">留学生との交流</div>
+        <div class="card-description">オーストラリアからの留学生Tonとの出会い。異文化交流や自己表現、Buddyとしての学校案内。</div>
+        <div class="card-tag"><span></span> Start Practice</div>
+      </a>
+
+      <a href="test5.html" class="card">
+        <div class="card-icon">🌱</div>
+        <div class="card-number">Test 05</div>
+        <div class="card-title">ボランティア活動</div>
+        <div class="card-description">コミュニティセンターでのボランティア体験。お年寄りとの交流や読み聞かせ、社会貢献について。</div>
+        <div class="card-tag"><span></span> Start Practice</div>
+      </a>
+    </div>
+
+    <h2 class="section-title">Vocabulary Tools</h2>
+    <div class="grid">
+      <a href="flashcards.html" class="card flashcard">
+        <div class="card-icon">📚</div>
+        <div class="card-number">Interactive</div>
+        <div class="card-title">単語帳 (Flashcards)</div>
+        <div class="card-description">アニメーション付きのインタラクティブな単語帳。単語と意味をゲーム感覚で覚えよう。</div>
+        <div class="card-tag"><span></span> Open Tool</div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 English Mastery. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

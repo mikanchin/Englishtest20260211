@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学1年生 英語長文問題</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg2: #1e293b;
+            --txt: #f1f5f9;
+            --txt2: #94a3b8;
+            --muted: #64748b;
+            --blue: #38bdf8;
+            --purple: #a78bfa;
+            --green: #34d399;
+            --orange: #fb923c;
+            --ok: #22c55e;
+            --ng: #ef4444;
+            --border: #334155;
+            --r: 16px
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            line-height: 1.8;
+            min-height: 100vh
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f, #2d1b69, #1e3a5f);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(56, 189, 248, .08), transparent 50%), radial-gradient(circle at 70% 50%, rgba(167, 139, 250, .08), transparent 50%);
+            animation: fl 12s ease-in-out infinite
+        }
+
+        @keyframes fl {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-20px)
+            }
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero .sub {
+            color: var(--txt2);
+            font-size: 1rem;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: .85rem;
+            color: var(--txt2)
+        }
+
+        .stat span {
+            font-weight: 700;
+            color: var(--blue)
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 80px
+        }
+
+        .passage {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 36px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .3);
+            position: relative
+        }
+
+        .passage::before {
+            content: '📖 Reading Passage';
+            position: absolute;
+            top: -14px;
+            left: 24px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: .8rem;
+            font-weight: 600
+        }
+
+        .passage p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 2.2;
+            margin-bottom: 16px;
+            text-indent: 1.5em;
+            text-align: justify
+        }
+
+        .wc {
+            text-align: right;
+            font-size: .8rem;
+            color: var(--muted);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border)
+        }
+
+        .sec-h {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border)
+        }
+
+        .sec-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0
+        }
+
+        .sec-icon.ch {
+            background: linear-gradient(135deg, #3b82f6, #2563eb)
+        }
+
+        .sec-icon.tf {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed)
+        }
+
+        .sec-t {
+            font-size: 1.2rem;
+            font-weight: 700
+        }
+
+        .sec-d {
+            font-size: .85rem;
+            color: var(--muted)
+        }
+
+        .qc {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all .3s
+        }
+
+        .qc:hover {
+            border-color: rgba(56, 189, 248, .3);
+            box-shadow: 0 0 20px rgba(56, 189, 248, .05)
+        }
+
+        .qc.ok {
+            border-color: var(--ok);
+            background: rgba(34, 197, 94, .05)
+        }
+
+        .qc.ng {
+            border-color: var(--ng);
+            background: rgba(239, 68, 68, .05)
+        }
+
+        .qn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            font-size: .8rem;
+            font-weight: 700;
+            margin-right: 10px;
+            flex-shrink: 0
+        }
+
+        .qt {
+            font-size: .98rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-left: 38px
+        }
+
+        @media(max-width:600px) {
+            .choices {
+                grid-template-columns: 1fr
+            }
+
+            .hero h1 {
+                font-size: 1.6rem
+            }
+
+            .passage {
+                padding: 24px 18px
+            }
+
+            .qc {
+                padding: 18px
+            }
+
+            .container {
+                padding: 20px 12px 60px
+            }
+        }
+
+        .cb {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--txt);
+            font-size: .9rem;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: left;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif
+        }
+
+        .cb:hover {
+            background: rgba(56, 189, 248, .08);
+            border-color: var(--blue);
+            transform: translateY(-1px)
+        }
+
+        .cb.sel {
+            background: rgba(56, 189, 248, .15);
+            border-color: var(--blue);
+            color: var(--blue);
+            font-weight: 500
+        }
+
+        .cb.ca {
+            background: rgba(34, 197, 94, .15);
+            border-color: var(--ok);
+            color: var(--ok)
+        }
+
+        .cb.wa {
+            background: rgba(239, 68, 68, .15);
+            border-color: var(--ng);
+            color: var(--ng)
+        }
+
+        .tfc {
+            display: flex;
+            gap: 12px;
+            margin-left: 38px
+        }
+
+        .tb {
+            flex: 1;
+            max-width: 180px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, .04);
+            color: var(--txt);
+            font-size: .9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .25s;
+            text-align: center;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif
+        }
+
+        .tb:hover {
+            transform: translateY(-1px)
+        }
+
+        .tb.t:hover {
+            background: rgba(34, 197, 94, .1);
+            border-color: var(--ok)
+        }
+
+        .tb.f:hover {
+            background: rgba(239, 68, 68, .1);
+            border-color: var(--ng)
+        }
+
+        .tb.sel.t {
+            background: rgba(34, 197, 94, .15);
+            border-color: var(--ok);
+            color: var(--ok)
+        }
+
+        .tb.sel.f {
+            background: rgba(239, 68, 68, .15);
+            border-color: var(--ng);
+            color: var(--ng)
+        }
+
+        .tb.ca {
+            background: rgba(34, 197, 94, .2) !important;
+            border-color: var(--ok) !important;
+            color: var(--ok) !important
+        }
+
+        .tb.wa {
+            background: rgba(239, 68, 68, .2) !important;
+            border-color: var(--ng) !important;
+            color: var(--ng) !important
+        }
+
+        .fb {
+            display: none;
+            margin-top: 8px;
+            margin-left: 38px;
+            font-size: .82rem;
+            padding: 8px 12px;
+            border-radius: 6px
+        }
+
+        .fb.v {
+            display: block;
+            animation: fi .4s ease
+        }
+
+        .fb.okf {
+            background: rgba(34, 197, 94, .08);
+            color: var(--ok)
+        }
+
+        .fb.ngf {
+            background: rgba(239, 68, 68, .08);
+            color: var(--ng)
+        }
+
+        @keyframes fi {
+            from {
+                opacity: 0;
+                transform: translateY(-4px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .sub-s {
+            text-align: center;
+            margin-top: 40px
+        }
+
+        .sub-b {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: #fff;
+            border: none;
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all .3s;
+            font-family: 'Noto Sans JP', sans-serif;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, .3)
+        }
+
+        .sub-b:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(56, 189, 248, .4)
+        }
+
+        .sov {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, .9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fi .4s ease
+        }
+
+        .sov.v {
+            display: flex
+        }
+
+        .sc {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 48px;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+            animation: pi .5s ease
+        }
+
+        @keyframes pi {
+            from {
+                opacity: 0;
+                transform: scale(.8)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        .scr {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            position: relative
+        }
+
+        .scr::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--blue), var(--purple), var(--green));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude
+        }
+
+        .sl {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .sd {
+            color: var(--txt2);
+            font-size: .9rem;
+            margin-bottom: 24px;
+            white-space: pre-line
+        }
+
+        .clb {
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid var(--border);
+            color: var(--txt);
+            padding: 10px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: .9rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all .25s
+        }
+
+        .clb:hover {
+            background: rgba(255, 255, 255, .12)
+        }
+
+        .clear-b {
+            background: transparent;
+            color: var(--txt2);
+            border: 1px solid var(--border);
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all .3s;
+            font-family: 'Noto Sans JP', sans-serif;
+            margin-left: 16px
+        }
+
+        .clear-b:hover {
+            background: rgba(239, 68, 68, .1);
+            border-color: var(--ng);
+            color: var(--ng);
+            transform: translateY(-2px)
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 40px
+        }
+
+        .history-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border)
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px
+        }
+
+        .history-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .history-clear {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: .8rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all .25s
+        }
+
+        .history-clear:hover {
+            border-color: var(--ng);
+            color: var(--ng)
+        }
+
+        .history-empty {
+            text-align: center;
+            color: var(--muted);
+            padding: 30px;
+            font-size: .9rem
+        }
+
+        .hi {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            animation: fi .4s ease
+        }
+
+        .hi-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .hi-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .06);
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--txt2);
+            flex-shrink: 0
+        }
+
+        .hi-date {
+            font-size: .82rem;
+            color: var(--muted)
+        }
+
+        .hi-score {
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .hi-score.high {
+            color: var(--ok)
+        }
+
+        .hi-score.mid {
+            color: var(--blue)
+        }
+
+        .hi-score.low {
+            color: var(--orange)
+        }
+
+
+        .hi-detail {
+            font-size: .78rem;
+            color: var(--txt2)
+        }
+
+        .print-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg2);
+            color: var(--txt);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all 0.2s;
+            margin-left: auto;
+            display: flex;
+        }
+
+        .print-btn:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .hero,
+            #part1,
+            #part2,
+            .btn-row,
+            .history-section,
+            .sov,
+            .print-btn {
+                display: none !important;
+            }
+
+            .container {
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .passage {
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+                color: #000;
+            }
+
+            .passage::before {
+                display: none;
+            }
+
+            .passage p {
+                font-size: 12pt;
+                line-height: 1.8;
+                text-align: left;
+                text-indent: 1em;
+            }
+
+            .wc {
+                color: #444;
+                border-top: 1px solid #ccc;
+            }
+
+            /* Add a title for print */
+            .passage::after {
+                content: "English Reading Test - Passage Only";
+                position: absolute;
+                top: -30px;
+                left: 0;
+                font-size: 14pt;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <h1>🇬🇧 English Reading Test</h1>
+        <p class="sub">中学1年生 ― 英語長文読解問題</p>
+        <div class="stats">
+            <div class="stat">📝 問題数 <span>50問</span></div>
+            <div class="stat">📖 長文 <span>約1000文字</span></div>
+            <div class="stat">⏱ 目安 <span>50分</span></div>
+        </div>
+    </div>
+    <div class="container">
+        <button class="print-btn" onclick="window.print()">🖨 本文のみ印刷</button>
+        <div class="passage">
+            <p>My name is Yuki Tanaka. I am twelve years old. I am a first-year student at Sakura Junior High School. I
+                live in a small city near Tokyo with my family. There are four people in my family: my father, my
+                mother, my brother Kenji, and me. My father is a doctor. He works at the city hospital. My mother is an
+                English teacher at an elementary school. She can speak English very well.</p>
+            <p>I like school very much. My favorite subject is English. I study English every day because I want to talk
+                with people from other countries someday. I also like music. I play the piano after school on Mondays
+                and Wednesdays. Kenji is fifteen years old. He is a third-year student. He likes sports, especially
+                soccer. He practices soccer every day after school. He is the captain of the soccer team.</p>
+            <p>We have a pet dog. His name is Pochi. He is three years old. He is very cute and friendly. Every morning,
+                I walk with Pochi in the park near my house. The park is big and beautiful. There are many trees and
+                flowers there. I usually walk for about thirty minutes.</p>
+            <p>On weekends, our family often goes to different places together. Last Sunday, we went to a big library in
+                Tokyo. I found many interesting English books there. I borrowed two books. One is about animals in
+                Africa, and the other is about a girl who travels around the world. I want to read both books this week.
+                My brother borrowed a book about famous soccer players. He was very happy.</p>
+            <p>My dream is to become an English teacher like my mother. I think English is very important and fun. I
+                study hard every day to make my dream come true. I hope I can help many students love English in the
+                future.</p>
+            <div class="wc">Word Count: 約 1,010 文字（スペース含む）</div>
+        </div>
+
+        <div id="part1"></div>
+        <div id="part2"></div>
+
+        <div class="btn-row">
+            <button class="sub-b" onclick="grade()">📊 採点する</button>
+            <button class="clear-b" onclick="clearTest()">🔄 やり直す</button>
+        </div>
+
+        <div class="history-section">
+            <div class="history-header">
+                <div class="history-title">📋 採点履歴</div>
+                <button class="history-clear" onclick="clearHistory()">履歴をクリア</button>
+            </div>
+            <div id="historyList"></div>
+        </div>
+    </div>
+
+    <div class="sov" id="ov">
+        <div class="sc">
+            <div class="scr" id="scr">–</div>
+            <div class="sl" id="sl">結果</div>
+            <div class="sd" id="sd"></div>
+            <button class="clb" onclick="document.getElementById('ov').classList.remove('v')">閉じる</button>
+        </div>
+    </div>
+
+    <script>
+        const MC = [
+            { q: "How old is Yuki?", a: "c", o: ["Ten years old", "Eleven years old", "Twelve years old", "Thirteen years old"], e: "\"I am twelve years old.\" と書かれています。" },
+            { q: "How many people are in Yuki's family?", a: "b", o: ["Three", "Four", "Five", "Six"], e: "father, mother, Kenji, Yuki の4人です。" },
+            { q: "What is Yuki's father's job?", a: "b", o: ["A teacher", "A doctor", "A cook", "A driver"], e: "\"My father is a doctor.\" と書かれています。" },
+            { q: "What is Yuki's favorite subject?", a: "d", o: ["Math", "Science", "Music", "English"], e: "\"My favorite subject is English.\" と書かれています。" },
+            { q: "When does Yuki play the piano?", a: "b", o: ["On Mondays and Thursdays", "On Mondays and Wednesdays", "On Tuesdays and Fridays", "Every day"], e: "\"on Mondays and Wednesdays\" と書かれています。" },
+            { q: "What sport does Kenji like?", a: "d", o: ["Baseball", "Basketball", "Tennis", "Soccer"], e: "\"He likes sports, especially soccer.\" と書かれています。" },
+            { q: "How old is Pochi?", a: "c", o: ["One year old", "Two years old", "Three years old", "Four years old"], e: "\"He is three years old.\" と書かれています。" },
+            { q: "Where did Yuki's family go last Sunday?", a: "b", o: ["A park", "A library", "A museum", "A zoo"], e: "\"we went to a big library in Tokyo\" と書かれています。" },
+            { q: "How many books did Yuki borrow?", a: "b", o: ["One", "Two", "Three", "Four"], e: "\"I borrowed two books.\" と書かれています。" },
+            { q: "What is Yuki's dream?", a: "c", o: ["To become a doctor", "To become a soccer player", "To become an English teacher", "To become a pianist"], e: "\"My dream is to become an English teacher\" と書かれています。" },
+            { q: "Where does Yuki live?", a: "a", o: ["In a small city near Tokyo", "In Tokyo", "In Osaka", "In a big city"], e: "\"I live in a small city near Tokyo\" と書かれています。" },
+            { q: "Where does Yuki's mother work?", a: "c", o: ["At a junior high school", "At a hospital", "At an elementary school", "At a university"], e: "\"an English teacher at an elementary school\" と書かれています。" },
+            { q: "How old is Kenji?", a: "d", o: ["Twelve", "Thirteen", "Fourteen", "Fifteen"], e: "\"Kenji is fifteen years old.\" と書かれています。" },
+            { q: "What instrument does Yuki play?", a: "b", o: ["The guitar", "The piano", "The violin", "The flute"], e: "\"I play the piano\" と書かれています。" },
+            { q: "What grade is Kenji in?", a: "c", o: ["A first-year student", "A second-year student", "A third-year student", "A fourth-year student"], e: "\"He is a third-year student.\" と書かれています。" },
+            { q: "What kind of pet does Yuki have?", a: "a", o: ["A dog", "A cat", "A bird", "A fish"], e: "\"We have a pet dog.\" と書かれています。" },
+            { q: "What is Pochi like?", a: "d", o: ["Big and strong", "Small and quiet", "Fast and smart", "Cute and friendly"], e: "\"He is very cute and friendly.\" と書かれています。" },
+            { q: "How long does Yuki walk with Pochi?", a: "c", o: ["About ten minutes", "About twenty minutes", "About thirty minutes", "About one hour"], e: "\"I usually walk for about thirty minutes.\" と書かれています。" },
+            { q: "What does the park near Yuki's house have?", a: "b", o: ["A river and bridge", "Many trees and flowers", "A big lake", "A playground"], e: "\"There are many trees and flowers there.\" と書かれています。" },
+            { q: "What is one of Yuki's borrowed books about?", a: "a", o: ["Animals in Africa", "Flowers in Japan", "Sports in America", "Food around the world"], e: "\"One is about animals in Africa\" と書かれています。" },
+            { q: "What is the other book Yuki borrowed about?", a: "d", o: ["A boy who plays soccer", "A doctor in a hospital", "A teacher at school", "A girl who travels around the world"], e: "\"a girl who travels around the world\" と書かれています。" },
+            { q: "What did Kenji borrow from the library?", a: "c", o: ["A book about music", "A book about animals", "A book about famous soccer players", "A book about English"], e: "\"a book about famous soccer players\" と書かれています。" },
+            { q: "Why does Yuki study English every day?", a: "a", o: ["To talk with people from other countries", "To become a doctor", "To go to Tokyo", "To play soccer"], e: "\"I want to talk with people from other countries someday\" と書かれています。" },
+            { q: "What does Yuki think about English?", a: "b", o: ["Difficult and boring", "Important and fun", "Easy and simple", "Hard but useful"], e: "\"I think English is very important and fun.\" と書かれています。" },
+            { q: "What does Yuki hope for the future?", a: "d", o: ["To live in Tokyo", "To play the piano well", "To travel the world", "To help students love English"], e: "\"I hope I can help many students love English\" と書かれています。" }
+        ];
+
+        const TF = [
+            { q: "Yuki lives in Tokyo.", a: false, e: "Yukiは東京ではなく「a small city near Tokyo」に住んでいます。" },
+            { q: "Yuki's mother is an English teacher.", a: true, e: "\"My mother is an English teacher\" と書かれています。" },
+            { q: "Kenji is twelve years old.", a: false, e: "Kenjiは15歳（fifteen）です。12歳はYukiです。" },
+            { q: "Yuki plays the guitar after school.", a: false, e: "ギターではなくピアノ（piano）を弾きます。" },
+            { q: "Kenji is the captain of the soccer team.", a: true, e: "\"He is the captain of the soccer team.\" と書かれています。" },
+            { q: "Pochi is a cat.", a: false, e: "猫ではなく犬（\"a pet dog\"）です。" },
+            { q: "Yuki usually walks with Pochi for about thirty minutes.", a: true, e: "\"I usually walk for about thirty minutes.\" と書かれています。" },
+            { q: "Kenji borrowed a book about English teachers.", a: false, e: "英語教師ではなくサッカー選手（\"famous soccer players\"）の本です。" },
+            { q: "Yuki is a first-year student at Sakura Junior High School.", a: true, e: "\"I am a first-year student at Sakura Junior High School.\" と書かれています。" },
+            { q: "There are five people in Yuki's family.", a: false, e: "家族は5人ではなく4人（four）です。" },
+            { q: "Yuki's father works at the city hospital.", a: true, e: "\"He works at the city hospital.\" と書かれています。" },
+            { q: "Yuki likes music.", a: true, e: "\"I also like music.\" と書かれています。" },
+            { q: "Yuki walks with Pochi in the evening.", a: false, e: "夕方ではなく毎朝（\"Every morning\"）です。" },
+            { q: "The park near Yuki's house is small.", a: false, e: "小さいではなく大きい（\"big and beautiful\"）です。" },
+            { q: "Yuki's family went to a library in Osaka last Sunday.", a: false, e: "大阪ではなく東京（Tokyo）の図書館です。" },
+            { q: "Yuki borrowed three books from the library.", a: false, e: "3冊ではなく2冊（\"two books\"）です。" },
+            { q: "Kenji practices soccer every day after school.", a: true, e: "\"He practices soccer every day after school.\" と書かれています。" },
+            { q: "Yuki's mother can speak English very well.", a: true, e: "\"She can speak English very well.\" と書かれています。" },
+            { q: "One of Yuki's books is about animals in Africa.", a: true, e: "\"One is about animals in Africa\" と書かれています。" },
+            { q: "Yuki's father is a teacher.", a: false, e: "教師ではなく医者（\"a doctor\"）です。" },
+            { q: "Yuki wants to read both books next month.", a: false, e: "来月ではなく今週（\"this week\"）です。" },
+            { q: "There are many trees and flowers in the park.", a: true, e: "\"There are many trees and flowers there.\" と書かれています。" },
+            { q: "Kenji was very happy about his book.", a: true, e: "\"He was very happy.\" と書かれています。" },
+            { q: "Yuki studies English because she wants to become a doctor.", a: false, e: "医者になるためではなく外国の人と話すため（\"talk with people from other countries\"）です。" },
+            { q: "Yuki's family often goes to different places on weekends.", a: true, e: "\"our family often goes to different places together\" と書かれています。" }
+        ];
+
+        const ua = {};
+        const labels = ["ア", "イ", "ウ", "エ"];
+        const keys = ["a", "b", "c", "d"];
+
+        function buildMC() {
+            let h = '<div class="sec-h"><div class="sec-icon ch">🅰</div><div><div class="sec-t">Part 1：選択式問題（Q1～Q25）</div><div class="sec-d">正しい答えをア～エの中から1つ選びなさい。</div></div></div>';
+            MC.forEach((item, i) => {
+                const n = i + 1;
+                h += `<div class="qc" id="q${n}"><div class="qt"><span class="qn">${n}</span>${item.q}</div><div class="choices">`;
+                item.o.forEach((opt, j) => {
+                    h += `<button class="cb" data-q="${n}" data-v="${keys[j]}" onclick="sel(this)">${labels[j]}. ${opt}</button>`;
+                });
+                h += `</div><div class="fb" id="fb${n}"></div></div>`;
+            });
+            document.getElementById('part1').innerHTML = h;
+        }
+
+        function buildTF() {
+            let h = '<div class="sec-h"><div class="sec-icon tf">⭕</div><div><div class="sec-t">Part 2：正誤問題（Q26～Q50）</div><div class="sec-d">本文の内容と合っていれば「〇 True」、合っていなければ「✕ False」を選びなさい。</div></div></div>';
+            TF.forEach((item, i) => {
+                const n = i + 26;
+                h += `<div class="qc" id="q${n}"><div class="qt"><span class="qn">${n}</span>${item.q}</div><div class="tfc">`;
+                h += `<button class="tb t" data-q="${n}" data-v="true" onclick="tsel(this)">〇 True</button>`;
+                h += `<button class="tb f" data-q="${n}" data-v="false" onclick="tsel(this)">✕ False</button>`;
+                h += `</div><div class="fb" id="fb${n}"></div></div>`;
+            });
+            document.getElementById('part2').innerHTML = h;
+        }
+
+        function sel(el) {
+            const q = el.dataset.q;
+            document.querySelectorAll(`.cb[data-q="${q}"]`).forEach(b => b.classList.remove('sel'));
+            el.classList.add('sel');
+            ua[q] = el.dataset.v;
+        }
+
+        function tsel(el) {
+            const q = el.dataset.q;
+            document.querySelectorAll(`.tb[data-q="${q}"]`).forEach(b => b.classList.remove('sel'));
+            el.classList.add('sel');
+            ua[q] = el.dataset.v;
+        }
+
+        function grade() {
+            let c = 0;
+            MC.forEach((item, i) => {
+                const n = i + 1, card = document.getElementById(`q${n}`), fb = document.getElementById(`fb${n}`);
+                card.classList.remove('ok', 'ng'); fb.classList.remove('v', 'okf', 'ngf');
+                document.querySelectorAll(`.cb[data-q="${n}"]`).forEach(b => b.classList.remove('ca', 'wa'));
+                if (ua[n] === item.a) { c++; card.classList.add('ok'); fb.textContent = '✅ 正解！ — ' + item.e; fb.classList.add('v', 'okf'); }
+                else {
+                    card.classList.add('ng'); fb.textContent = '❌ 不正解 — ' + item.e; fb.classList.add('v', 'ngf');
+                    document.querySelector(`.cb[data-q="${n}"][data-v="${item.a}"]`)?.classList.add('ca');
+                    if (ua[n]) document.querySelector(`.cb[data-q="${n}"][data-v="${ua[n]}"]`)?.classList.add('wa');
+                }
+            });
+            TF.forEach((item, i) => {
+                const n = i + 26, card = document.getElementById(`q${n}`), fb = document.getElementById(`fb${n}`), ans = String(item.a);
+                card.classList.remove('ok', 'ng'); fb.classList.remove('v', 'okf', 'ngf');
+                document.querySelectorAll(`.tb[data-q="${n}"]`).forEach(b => b.classList.remove('ca', 'wa'));
+                if (ua[n] === ans) { c++; card.classList.add('ok'); fb.textContent = '✅ 正解！ — ' + item.e; fb.classList.add('v', 'okf'); }
+                else {
+                    card.classList.add('ng'); fb.textContent = '❌ 不正解 — ' + item.e; fb.classList.add('v', 'ngf');
+                    document.querySelector(`.tb[data-q="${n}"][data-v="${ans}"]`)?.classList.add('ca');
+                    if (ua[n]) document.querySelector(`.tb[data-q="${n}"][data-v="${ua[n]}"]`)?.classList.add('wa');
+                }
+            });
+            const total = 50, pct = Math.round(c / total * 100);
+            document.getElementById('scr').textContent = pct + '%';
+            const sl = document.getElementById('sl');
+            if (pct >= 80) { sl.textContent = '🎉 すばらしい！'; sl.style.color = 'var(--ok)'; }
+            else if (pct >= 60) { sl.textContent = '👍 がんばりました！'; sl.style.color = 'var(--blue)'; }
+            else { sl.textContent = '📖 もう一度読んでみよう！'; sl.style.color = 'var(--orange)'; }
+            document.getElementById('sd').textContent = `${c} / ${total} 問正解\n選択式：${MC.length}問 ／ 正誤：${TF.length}問`;
+            document.getElementById('ov').classList.add('v');
+            document.getElementById('q1').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 履歴に保存
+            const history = JSON.parse(localStorage.getItem('testHistory') || '[]');
+            const now = new Date();
+            history.push({
+                date: now.toLocaleString('ja-JP'),
+                correct: c,
+                total: total,
+                pct: pct
+            });
+            localStorage.setItem('testHistory', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function clearTest() {
+            // 回答データをクリア
+            Object.keys(ua).forEach(k => delete ua[k]);
+            // 選択状態をリセット
+            document.querySelectorAll('.cb').forEach(b => b.classList.remove('sel', 'ca', 'wa'));
+            document.querySelectorAll('.tb').forEach(b => b.classList.remove('sel', 'ca', 'wa'));
+            // カードの正誤表示をリセット
+            document.querySelectorAll('.qc').forEach(c => c.classList.remove('ok', 'ng'));
+            // フィードバックを非表示
+            document.querySelectorAll('.fb').forEach(f => { f.classList.remove('v', 'okf', 'ngf'); f.textContent = ''; });
+            // ページトップへスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('testHistory') || '[]');
+            const el = document.getElementById('historyList');
+            if (history.length === 0) {
+                el.innerHTML = '<div class="history-empty">まだ採点履歴がありません。</div>';
+                return;
+            }
+            let h = '';
+            history.slice().reverse().forEach((item, i) => {
+                const num = history.length - i;
+                const cls = item.pct >= 80 ? 'high' : item.pct >= 60 ? 'mid' : 'low';
+                h += `<div class="hi">`;
+                h += `<div class="hi-left">`;
+                h += `<span class="hi-num">${num}</span>`;
+                h += `<div><div class="hi-detail">${item.correct} / ${item.total} 問正解</div><div class="hi-date">${item.date}</div></div>`;
+                h += `</div>`;
+                h += `<div class="hi-score ${cls}">${item.pct}%</div>`;
+                h += `</div>`;
+            });
+            el.innerHTML = h;
+        }
+
+        function clearHistory() {
+            if (confirm('採点履歴をすべて削除しますか？')) {
+                localStorage.removeItem('testHistory');
+                renderHistory();
+            }
+        }
+
+        document.getElementById('ov').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('v'); });
+        buildMC(); buildTF(); renderHistory();
+    </script>
+</body>
+
+</html>
